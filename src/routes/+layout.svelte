@@ -11,6 +11,7 @@
 	import { page } from '$app/state';
 	import { Button } from '$lib/components/ui/button';
 	import Github from '@lucide/svelte/icons/github';
+	import { resolve } from '$app/paths';
 
 	let { children } = $props();
 </script>
@@ -34,16 +35,9 @@
 						{#each page.url.pathname.split('/').filter(Boolean) as segment, index}
 							<Breadcrumb.Item>
 								{#if index < page.url.pathname.split('/').filter(Boolean).length - 1}
-									<Breadcrumb.Link
-										href={'/' +
-											page.url.pathname
-												.split('/')
-												.filter(Boolean)
-												.slice(0, index + 1)
-												.join('/')}
-									>
+									<Breadcrumb.Item>
 										{segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')}
-									</Breadcrumb.Link>
+									</Breadcrumb.Item>
 								{:else}
 									<Breadcrumb.Page>
 										{segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')}
