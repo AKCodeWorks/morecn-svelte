@@ -6,41 +6,32 @@ on:
       - main
 
 jobs:
-  build_site:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # if you're using pnpm, enable this and switch npm -> pnpm below
-      # - name: Install pnpm
-      #   uses: pnpm/action-setup@v3
-      #   with:
-      #     version: 8
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
-          cache: npm
+          bun-version: latest
 
       - name: Install dependencies
-        run: npm install
+        run: bun install
 
       - name: Build
         env:
           BASE_PATH: "/${{ github.event.repository.name }}"
-        run: npm run build
+        run: bun run build
 
-      - name: Upload Artifacts
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # this should match the `pages` option in your adapter-static options
           path: build/
 
   deploy:
-    needs: build_site
+    needs: build
     runs-on: ubuntu-latest
 
     permissions:
@@ -52,6 +43,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
