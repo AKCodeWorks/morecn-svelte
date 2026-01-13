@@ -5,7 +5,7 @@
 	"items": [
 		{
 			"name": "combobox",
-			"type": "registry:ui",
+			"type": "registry:component",
 			"title": "Combobox",
 			"description": "A single select dropdown with search functionality.",
 			"registryDependencies": [
@@ -18,7 +18,7 @@
 			"files": [
 				{
 					"path": "src/lib/registry/ui/combobox/combobox.svelte",
-					"type": "registry:component"
+					"type": "registry:ui"
 				}
 			],
 			"meta": {
