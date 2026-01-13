@@ -1,0 +1,29 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry.json",
+	"name": "morecn-svelte",
+	"homepage": "https://morecn-svelte.com",
+	"items": [
+		{
+			"name": "combobox",
+			"type": "registry:component",
+			"title": "Combobox",
+			"description": "A single select dropdown with search functionality.",
+			"registryDependencies": [
+				"select",
+				"input",
+				"command",
+				"popover",
+				"button"
+			],
+			"files": [
+				{
+					"path": "src/lib/registry/ui/combobox/combobox.svelte",
+					"type": "registry:component"
+				}
+			],
+			"meta": {
+				"author": "akcodeworks"
+			}
+		}
+	]
+}

@@ -1,0 +1,19 @@
+[
+	{
+		"name": "combobox",
+		"title": "Combobox",
+		"type": "registry:component",
+		"description": "A single select dropdown with search functionality.",
+		"registryDependencies": [
+			"select",
+			"input",
+			"command",
+			"popover",
+			"button"
+		],
+		"meta": {
+			"author": "akcodeworks"
+		},
+		"relativeUrl": "combobox.json"
+	}
+]

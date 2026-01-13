@@ -1,0 +1,27 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "combobox",
+	"title": "Combobox",
+	"type": "registry:component",
+	"description": "A single select dropdown with search functionality.",
+	"devDependencies": [
+		"@lucide/svelte@^0.561.0"
+	],
+	"registryDependencies": [
+		"select",
+		"input",
+		"command",
+		"popover",
+		"button"
+	],
+	"meta": {
+		"author": "akcodeworks"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\" generics=\"T extends Record<string, any>\">\n\timport CheckIcon from '@lucide/svelte/icons/check';\n\timport ChevronsUpDownIcon from '@lucide/svelte/icons/chevrons-up-down';\n\timport { tick, type ComponentProps } from 'svelte';\n\timport * as Command from '$lib/components/ui/command';\n\timport * as Popover from '$lib/components/ui/popover';\n\timport { Button } from '$lib/components/ui/button';\n\timport { cn } from '$UTILS$';\n\timport { browser } from '$app/environment';\n\timport type { HTMLButtonAttributes } from 'svelte/elements';\n\n\ttype Props = {\n\t\tplaceholder?: string;\n\t\tlabelKey: Extract<keyof T, string>;\n\t\tvalueKey: Extract<keyof T, string>;\n\t\trecords: (T & Record<Props['labelKey'], string> & Record<Props['valueKey'], string>)[];\n\t\tvalue?: string;\n\t\tclass?: string;\n\t\tonValueChange?: (params: { value?: string; record: T }) => unknown | Promise<unknown>;\n\t} & Omit<ComponentProps<typeof Button>, 'type' | 'class'>;\n\n\tlet {\n\t\tplaceholder = 'Select an option',\n\t\tlabelKey,\n\t\tvalueKey,\n\t\trecords,\n\t\tclass: className,\n\t\tvalue = $bindable(),\n\t\tonValueChange,\n\t\t...restProps\n\t}: Props = $props();\n\n\tlet open = $state(false);\n\tlet triggerRef = $state<HTMLButtonElement>(null!);\n\tlet ref = $state<HTMLElement>(null!);\n\n\tconst selectedValue = $derived(records.find((r) => r[valueKey] === value)?.[labelKey]);\n\n\tfunction closeAndFocusTrigger() {\n\t\topen = false;\n\t\ttick().then(() => {\n\t\t\ttriggerRef.focus();\n\t\t});\n\t}\n\n\t$effect(() => {\n\t\tif (browser) {\n\t\t\tref?.style?.setProperty('width', `${triggerRef?.offsetWidth}px`);\n\t\t}\n\t});\n</script>\n\n<Popover.Root bind:open>\n\t<Popover.Trigger bind:ref={triggerRef}>\n\t\t{#snippet child({ props })}\n\t\t\t<Button\n\t\t\t\t{...restProps}\n\t\t\t\ttype=\"button\"\n\t\t\t\t{...props}\n\t\t\t\tvariant=\"outline\"\n\t\t\t\tclass={cn('justify-between', className)}\n\t\t\t\trole=\"combobox\"\n\t\t\t\taria-expanded={open}\n\t\t\t>\n\t\t\t\t{selectedValue || 'Select an option...'}\n\t\t\t\t<ChevronsUpDownIcon class=\"opacity-50\" />\n\t\t\t</Button>\n\t\t{/snippet}\n\t</Popover.Trigger>\n\t<Popover.Content bind:ref class=\"w-50 p-0\">\n\t\t<Command.Root>\n\t\t\t<Command.Input {placeholder} />\n\t\t\t<Command.List>\n\t\t\t\t<Command.Empty>No framework found.</Command.Empty>\n\t\t\t\t<Command.Group value=\"frameworks\">\n\t\t\t\t\t{#each records as record (record[valueKey])}\n\t\t\t\t\t\t<Command.Item\n\t\t\t\t\t\t\tvalue={record[valueKey]}\n\t\t\t\t\t\t\tonSelect={() => {\n\t\t\t\t\t\t\t\tvalue = record[valueKey];\n\t\t\t\t\t\t\t\tonValueChange?.({ value, record });\n\t\t\t\t\t\t\t\tcloseAndFocusTrigger();\n\t\t\t\t\t\t\t}}\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\t<CheckIcon class={cn(value !== record[valueKey] && 'text-transparent')} />\n\t\t\t\t\t\t\t{record[labelKey]}\n\t\t\t\t\t\t</Command.Item>\n\t\t\t\t\t{/each}\n\t\t\t\t</Command.Group>\n\t\t\t</Command.List>\n\t\t</Command.Root>\n\t</Popover.Content>\n</Popover.Root>\n",
+			"type": "registry:component",
+			"target": "combobox.svelte"
+		}
+	]
+}
