@@ -11,7 +11,6 @@
 	import { page } from '$app/state';
 	import { Button } from '$lib/components/ui/button';
 	import Github from '@lucide/svelte/icons/github';
-	import { resolve } from '$app/paths';
 
 	let { children } = $props();
 </script>

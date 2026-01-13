@@ -13,7 +13,7 @@ export const ROUTES = [
   },
   {
     title: 'Components',
-    url: '/components',
+    url: resolve("/components"),
     items: [
       {
         title: 'Combobox',
