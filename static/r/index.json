@@ -2,7 +2,7 @@
 	{
 		"name": "combobox",
 		"title": "Combobox",
-		"type": "registry:component",
+		"type": "registry:ui",
 		"description": "A single select dropdown with search functionality.",
 		"registryDependencies": [
 			"select",

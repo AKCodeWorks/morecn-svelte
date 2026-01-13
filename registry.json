@@ -5,7 +5,7 @@
 	"items": [
 		{
 			"name": "combobox",
-			"type": "registry:component",
+			"type": "registry:ui",
 			"title": "Combobox",
 			"description": "A single select dropdown with search functionality.",
 			"registryDependencies": [
