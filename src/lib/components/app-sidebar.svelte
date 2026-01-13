@@ -3,6 +3,8 @@
 	import Logo from '$lib/assets/favicon.svg';
 	import type { ComponentProps } from 'svelte';
 	import { ROUTES } from '$lib/routes';
+	import { resolve } from '$app/paths';
+
 	let { ref = $bindable(null), ...restProps }: ComponentProps<typeof Sidebar.Root> = $props();
 </script>
 
@@ -12,7 +14,7 @@
 			<Sidebar.MenuItem>
 				<Sidebar.MenuButton size="lg">
 					{#snippet child({ props })}
-						<a href="/" {...props}>
+						<a href={resolve('/')} {...props}>
 							<div
 								class="flex aspect-square size-8 items-center justify-center rounded-lg border-2 border-secondary-foreground bg-orange-600 p-1 text-sidebar-primary-foreground"
 							>
