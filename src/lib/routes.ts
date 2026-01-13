@@ -1,3 +1,5 @@
+import { resolve } from "$app/paths";
+
 export const ROUTES = [
   {
     title: 'Getting Started',
@@ -5,7 +7,7 @@ export const ROUTES = [
     items: [
       {
         title: 'Installation',
-        url: '/installation'
+        url: resolve("/installation")
       }
     ]
   },
@@ -15,7 +17,7 @@ export const ROUTES = [
     items: [
       {
         title: 'Combobox',
-        url: '/components/combobox'
+        url: resolve("/components/combobox")
       },
 
     ]
