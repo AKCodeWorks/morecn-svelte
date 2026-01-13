@@ -2,6 +2,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as Accordion from '$lib/components/ui/accordion';
 	import { Separator } from '$lib/components/ui/separator';
+	import { resolve } from '$app/paths';
 
 	const faqs = [
 		{
@@ -32,7 +33,7 @@
 					warning. Use at your own risk.
 				</p>
 				<div class="flex flex-wrap gap-3">
-					<Button href="/components/combobox" size="lg">Browse components</Button>
+					<Button href={resolve('/components/combobox')} size="lg">Browse components</Button>
 				</div>
 			</div>
 		</div>
